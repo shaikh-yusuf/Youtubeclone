@@ -19,10 +19,11 @@ window.addEventListener("load", () => {
     fetch(`${BASE_URL}/channels?key=${API_KEY}&part=snippet&id=${channelId}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("channel", data.items[0].snippet.title);
+        console.log("lll", data);
+        console.log("channel", data.items[0].id);
         let name = data.items[0].snippet.title;
         document.getElementById("channel_Name").innerText = name;
-        loadChannelInfo(name);
+        loadRecommendedVideos(name)
       });
   }
 
@@ -63,62 +64,56 @@ window.addEventListener("load", () => {
         // [0].snippet.topLevelComment.snippet.textDisplay
       });
   }
-  function loadChannelInfo(channelname) {
-    const filter = "categoryId";
-    fetch(
-      `${BASE_URL}/channels?key=${API_KEY}&part=snippet&${filter}=${channelname}&type=video&maxResuls=20`
-    ).then((res) => {
-      res.json();
-      console.log("load", res.url);
-    });
 
-    // if (!response.ok) {
-    //   throw new Error(`HTTP error! status: ${response.status}`);
-    // }
-
-    // loadRecommendedVideos(data.items[0].snippet.title);
+  async function loadRecommendedVideos(channelName) {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/search?key=${API_KEY}&maxResults=10&part=snippet&q=${channelName}`
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log("Recommended videos", data);
+      if (data.items) {
+        displayRecommendedVideos(data.items);
+      } else {
+        console.log("No recommended videos available or data is undefined.");
+      }
+    } catch (error) {
+      console.error("Error fetching recommended videos: ", error);
+    }
   }
-  // async function loadRecommendedVideos(channelName) {
-  //   try {
-  //     const response = await fetch(
-  //       `${BASE_URL}/search?key=${API_KEY}&maxResults=10&part=snippet&q=${channelName}`
-  //     );
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! status: ${response.status}`);
-  //     }
-  //     const data = await response.json();
-  //     console.log("Recommended videos", data);
-  //     if (data.items) {
-  //       displayRecommendedVideos(data.items);
-  //     } else {
-  //       console.log("No recommended videos available or data is undefined.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching recommended videos: ", error);
-  //   }
-  // }
 
-  // function displayRecommendedVideos(videos) {
-  //   const recommendedSection = document.getElementById("recommended-videos");
-  //   recommendedSection.innerHTML = "";
+  function displayRecommendedVideos(videos) {
+    const recommendedSection = document.getElementById("recommended-videos");
+    recommendedSection.innerHTML = "";
 
-  //   videos.forEach((video) => {
-  //     const videoId = video.id.videoId;
-  //     const title = video.snippet.title;
-  //     const thumbnail = video.snippet.thumbnails.default.url;
-  //     const videoCard = document.createElement("div");
-  //     videoCard.innerHTML = `
-  //           <a href="video.html?videoId=${videoId}">
-  //               <img src="${thumbnail}" alt="${title}">
-  //               <p>${title}</p>
-  //           </a>
-  //       `;
-  //     recommendedSection.appendChild(videoCard);
-  //   });
-  // }
+    videos.forEach((video) => {
+      const videoId = video.id.videoId;
+      const title = video.snippet.title;
+      const thumbnail = video.snippet.thumbnails.default.url;
+      const videoCard = document.createElement("div");
+      videoCard.innerHTML = `
+            <a href="video.html?videoId=${videoId}">
+                <img src="${thumbnail}" alt="${title}" >
+                <div class="content">
+                <div class="info">
+                <p class="channel-name">${title}</p>
+                </div>
+                </div>
+            </a>
+        `;
+
+        
+
+
+  
+      recommendedSection.appendChild(videoCard);
+    });
+  }
 
   getVideoStats();
   getVideoDetails();
   getComments();
 });
-
