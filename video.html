@@ -1,57 +1,62 @@
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Video Page</title>
-    <meta name="description" content="" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Video Page</title>
+  <meta name="description" content="" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="./img/favi.png" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <nav class="navbar">
-        <div class="toggle-btn">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <img src="img/logo.PNG" class="logo" alt="" />
-        <div class="search-box">
-          <input
-            type="text"
-            id="search-input"
-            class="search-bar"
-            placeholder="search"
-          />
-          <button class="search-btn" id="search-btn">
-            <img src="img/search.PNG" alt="" />
-          </button>
-        </div>
-        <div class="user-options">
-          <img src="img/video.PNG" class="icon" alt="" />
-          <img src="img/grid.PNG" class="icon" alt="" />
-          <img src="img/bell.PNG" class="icon" alt="" />
-          <div class="user-dp">
-            <img src="img/profile-pic.png" alt="" />
-          </div>
-        </div>
-    </nav>
-    <div id="video-container">
-      <!-- where video will be -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/x-icon" href="./img/favi.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="toggle-btn">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
+    <img src="img/logo.PNG" class="logo" alt="" />
+    <div class="search-box">
+      <input type="text" id="search-input" class="search-bar" placeholder="search" />
+      <button class="search-btn" id="search-btn">
+        <img src="img/search.PNG" alt="" />
+      </button>
+    </div>
+    <div class="user-options">
+      <img src="img/video.PNG" class="icon" alt="" />
+      <img src="img/grid.PNG" class="icon" alt="" />
+      <img src="img/bell.PNG" class="icon" alt="" />
+      <div class="user-dp">
+        <img src="img/profile-pic.png" alt="" />
+      </div>
+    </div>
+  </nav>
+  <div class="parent">
+    <div class="one">
+      <div id="video-container">
+        <!-- where video will be -->
+      </div>
     
-    <div id="comment-section">
+      <div id="comment-section">
         <h1 id="channel_Name"></h1>
         <h2>Comments</h2>
         <!-- Comments will be loaded here -->
       </div>
-    
+    </div>
+    <div class="two">
       <div id="recommended-videos">
         <h2>Recommended Videos</h2>
         <!-- Recommended videos will be loaded here -->
       </div>
-    <!-- official script yt - cdn -->
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="./video.js"></script>
-  </body>
+    </div>
+  </div>
+  
+
+  
+  <!-- official script yt - cdn -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="./video.js"></script>
+</body>
+
 </html>

@@ -23,7 +23,7 @@ window.addEventListener("load", () => {
         console.log("channel", data.items[0].id);
         let name = data.items[0].snippet.title;
         document.getElementById("channel_Name").innerText = name;
-        loadRecommendedVideos(name)
+        loadRecommendedVideos(name);
       });
   }
 
@@ -56,7 +56,7 @@ window.addEventListener("load", () => {
           document.getElementById("comment-section").innerHTML += `
          
           <img src="${data.snippet.topLevelComment.snippet.authorProfileImageUrl}" class="" alt="">
-         <h4 class="title">${data.snippet.topLevelComment.snippet.textDisplay}</h4>
+         <h4 class="title" >${data.snippet.topLevelComment.snippet.textDisplay}</h4>
          `;
         });
 
@@ -105,10 +105,6 @@ window.addEventListener("load", () => {
             </a>
         `;
 
-        
-
-
-  
       recommendedSection.appendChild(videoCard);
     });
   }
